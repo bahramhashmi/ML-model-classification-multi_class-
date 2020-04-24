@@ -1,0 +1,53 @@
+from sklearn.datasets import load_digits
+%matplotlib inline
+import matplotlib.pyplot as plt
+digits=load_digits()
+
+type(digits)
+
+plt.gray()
+for i in range(9):
+    plt.matshow(digits.images[i])#matshow is a function i.e=which will accept image data
+
+plt.matshow(digits.images[0])
+
+dir(digits)
+
+digits.data[0]#data of ith row i.e 0
+
+digits.target[0]
+
+from sklearn.linear_model import LogisticRegression
+model=LogisticRegression()
+
+from sklearn.model_selection import train_test_split
+
+x_train,x_test,y_train,y_test=train_test_split(digits.data,digits.target,train_size=.8)
+len(x_train)
+len(x_test)
+
+model.fit(x_train,y_train)
+model.score(x_test,y_test)
+
+model.score(x_test,y_test)
+
+model.predict(digits.data[0:5])
+
+plt.matshow(digits.images[1796])
+digits.target[1796]
+
+model.predict([digits.data[1796]])
+
+
+y_predicted=model.predict(x_test)
+from sklearn.metrics import confusion_matrix
+
+cm=confusion_matrix(y_test,y_predicted)
+cm
+
+import seaborn as sns
+plt.figure(figsize=(10,7))
+sns.heatmap(cm,annot=True)
+plt.xlabel('Predicted')
+plt.ylabel('Truth')
+
